@@ -1,0 +1,11 @@
+node_modules/ 
+tests/ 
+coverage/ 
+.log 
+src/.test.* 
+rollup.config.js 
+tsconfig.json 
+.gitignore
+README.md
+github.ci.yml
+package-lock.json

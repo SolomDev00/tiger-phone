@@ -1,0 +1,64 @@
+{
+  "name": "tiger-phone",
+  "version": "1.0.0",
+  "description": "A smart, performant React component for phone number input with automatic country detection, dropdown selection, search, and virtualization. Supports RTL/LTR directions, multiple languages, and extensive customization.",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src/data/countries.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:cjs": "rollup -c --bundleConfigAsCjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "phone-input",
+    "country-detection",
+    "internationalization",
+    "typescript",
+    "rtl",
+    "virtualization"
+  ],
+  "author": "SolomDev00 solomdev0@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolomDev00/react-tiger-phone.git"
+  },
+  "homepage": "https://github.com/SolomDev00/react-tiger-phone#readme",
+  "peerDependencies": {
+    "lucide-react": "^0.544.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-virtuoso": "^4.14.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@testing-library/jest-dom": "^6.6.2",
+    "@testing-library/react": "^16.0.1",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "jsdom": "^25.0.1",
+    "rollup": "^4.22.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}
