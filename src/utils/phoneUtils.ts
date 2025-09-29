@@ -1,9 +1,11 @@
 import { countries, ICountry } from "../data/countries";
 
-interface PhoneNumber {
+export interface PhoneNumber {
   countryCode: string; // ISO country code (e.g., "EG")
   nationalNumber: string; // National number (e.g., "01014348488")
   dialCode: string; // Dial code (e.g., "+20")
+  minLength: number; // Minimum length of the phone number
+  maxLength: number; // Maximum length of the phone number
   isValid: () => boolean; // Validates the phone number against country-specific pattern
   formatInternational: () => string; // Formats number in international format (e.g., "+201014348488")
   formatNational: () => string; // Formats number in national format (e.g., "01014348488")
@@ -56,6 +58,31 @@ export function parsePhoneNumber(
     ? cleanNumber.substring(1)
     : cleanNumber;
 
+  // Calculate minLength and maxLength from phonePattern
+  const getLengthConstraints = () => {
+    const pattern = selectedCountry!.phonePattern;
+    // Extract prefixes (e.g., "10|11|12|15" for Egypt)
+    const prefixMatch = pattern.match(/^\^?\(([\d|]+)\)/);
+    const prefixes = prefixMatch ? prefixMatch[1].split("|") : [""];
+
+    // Extract additional digits (e.g., "\d{7}" for Egypt)
+    const digitMatch = pattern.match(/\\d{(\d+)}/g);
+    const additionalDigits = digitMatch
+      ? digitMatch.map((m) => parseInt(m.match(/\d+/g)![0]))
+      : [0];
+
+    // Calculate lengths based on prefixes and additional digits
+    const lengths = prefixes.map(
+      (prefix) => prefix.length + Math.max(...additionalDigits)
+    );
+    return {
+      minLength: Math.min(...lengths),
+      maxLength: Math.max(...lengths),
+    };
+  };
+
+  const { minLength, maxLength } = getLengthConstraints();
+
   // Validate phone number against country-specific pattern
   const isValid = () => {
     if (!nationalNumber || !/^\d+$/.test(nationalNumber)) {
@@ -84,13 +111,15 @@ export function parsePhoneNumber(
   const valid = isValid();
   const error = valid
     ? undefined
-    : `Invalid phone number for ${selectedCountry.nameEn}. Expected format: ${selectedCountry.phonePattern}`;
+    : `Invalid phone number for ${selectedCountry.nameEn}. Expected ${minLength}-${maxLength} digits, matching pattern: ${selectedCountry.phonePattern}`;
 
   // Return PhoneNumber object
   return {
     countryCode: selectedCountry.code,
     nationalNumber,
     dialCode: selectedCountry.dialCode,
+    minLength,
+    maxLength,
     isValid,
     formatInternational,
     formatNational,
@@ -98,6 +127,3 @@ export function parsePhoneNumber(
     error,
   };
 }
-
-// Ensure file is recognized as a module
-export {};

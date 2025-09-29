@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "CommonJS",
+    "module": "ESNext",
     "jsx": "react-jsx",
     "declaration": true,
     "outDir": "./dist",

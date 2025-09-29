@@ -1,6 +1,6 @@
 {
   "name": "tiger-phone",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A smart, performant React component for phone number input with automatic country detection, dropdown selection, search, and virtualization. Supports RTL/LTR directions, multiple languages, and extensive customization.",
   "type": "module",
   "main": "dist/index.js",

@@ -8,6 +8,7 @@ import React, {
 import { ChevronDown, Phone, Search, Loader2 } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
 import { countries, ICountry } from "./data/countries";
+import { parsePhoneNumber, PhoneNumber } from "./utils/phoneUtils";
 import "./style.css";
 
 // SSR-safe check
@@ -66,6 +67,7 @@ interface IPhoneInputProps {
  * @param {boolean} [props.isLoading=false] - Whether the input is loading.
  * @param {boolean} [props.icon] - Icon for the input.
  */
+
 const PhoneInput: React.FC<IPhoneInputProps> = ({
   value,
   onChange,
@@ -151,6 +153,19 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
     },
     []
   );
+
+  // Get minLength and maxLength from parsePhoneNumber
+  const getLengthConstraints = useCallback(() => {
+    if (!selectedCountry) {
+      return { minLength: 7, maxLength: 15 }; // Fallback
+    }
+    const parsed = parsePhoneNumber(phoneNumber, selectedCountry.code);
+    return parsed
+      ? { minLength: parsed.minLength, maxLength: parsed.maxLength }
+      : { minLength: 7, maxLength: 15 }; // Fallback
+  }, [selectedCountry, phoneNumber]);
+
+  const { minLength, maxLength } = getLengthConstraints();
 
   useEffect(() => {
     if (value && !phoneNumber) {
@@ -367,6 +382,10 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
                   disabled={disabled}
                   aria-invalid={!!error}
                   aria-describedby={error ? "phone-error" : undefined}
+                  pattern="[0-9]*"
+                  minLength={minLength}
+                  maxLength={maxLength}
+                  inputMode="numeric"
                 />
               </>
             )}
