@@ -4,7 +4,7 @@ export interface ICountry {
   nameEn: string;
   dialCode: string;
   flag: string;
-  prefixes: string[];
+  phonePattern: string;
 }
 
 export const countries: ICountry[] = [
@@ -14,26 +14,8 @@ export const countries: ICountry[] = [
     nameEn: "Egypt",
     dialCode: "+20",
     flag: "🇪🇬",
-    prefixes: [
-      "10",
-      "11",
-      "12",
-      "15",
-      "100",
-      "101",
-      "106",
-      "109",
-      "110",
-      "111",
-      "112",
-      "114",
-      "115",
-      "120",
-      "121",
-      "122",
-      "127",
-      "128",
-    ],
+    phonePattern:
+      "^(10|11|12|15|100|101|106|109|110|111|112|114|115|120|121|122|127|128)\\d{7}$",
   },
   {
     code: "SA",
@@ -41,7 +23,7 @@ export const countries: ICountry[] = [
     nameEn: "Saudi Arabia",
     dialCode: "+966",
     flag: "🇸🇦",
-    prefixes: ["50", "53", "54", "55", "56", "57", "58", "59"],
+    phonePattern: "^(50|53|54|55|56|57|58|59)\\d{7}$",
   },
   {
     code: "AE",
@@ -49,7 +31,7 @@ export const countries: ICountry[] = [
     nameEn: "UAE",
     dialCode: "+971",
     flag: "🇦🇪",
-    prefixes: ["50", "52", "54", "55", "56", "58"],
+    phonePattern: "^(50|52|54|55|56|58)\\d{7}$",
   },
   {
     code: "QA",
@@ -57,7 +39,7 @@ export const countries: ICountry[] = [
     nameEn: "Qatar",
     dialCode: "+974",
     flag: "🇶🇦",
-    prefixes: ["30", "33", "50", "55", "66", "70", "77"],
+    phonePattern: "^(30|33|50|55|66|70|77)\\d{6}$",
   },
   {
     code: "KW",
@@ -65,22 +47,7 @@ export const countries: ICountry[] = [
     nameEn: "Kuwait",
     dialCode: "+965",
     flag: "🇰🇼",
-    prefixes: [
-      "50",
-      "51",
-      "55",
-      "60",
-      "65",
-      "66",
-      "67",
-      "69",
-      "90",
-      "94",
-      "95",
-      "96",
-      "97",
-      "99",
-    ],
+    phonePattern: "^(50|51|55|60|65|66|67|69|90|94|95|96|97|99)\\d{6}$",
   },
   {
     code: "BH",
@@ -88,7 +55,7 @@ export const countries: ICountry[] = [
     nameEn: "Bahrain",
     dialCode: "+973",
     flag: "🇧🇭",
-    prefixes: ["32", "33", "34", "35", "36", "37", "38", "39", "66", "77"],
+    phonePattern: "^(32|33|34|35|36|37|38|39|66|77)\\d{6}$",
   },
   {
     code: "OM",
@@ -96,7 +63,7 @@ export const countries: ICountry[] = [
     nameEn: "Oman",
     dialCode: "+968",
     flag: "🇴🇲",
-    prefixes: ["90", "91", "92", "93", "94", "95", "96", "97", "98", "99"],
+    phonePattern: "^(90|91|92|93|94|95|96|97|98|99)\\d{6}$",
   },
   {
     code: "JO",
@@ -104,7 +71,7 @@ export const countries: ICountry[] = [
     nameEn: "Jordan",
     dialCode: "+962",
     flag: "🇯🇴",
-    prefixes: ["77", "78", "79"],
+    phonePattern: "^(77|78|79)\\d{7}$",
   },
   {
     code: "LB",
@@ -112,7 +79,7 @@ export const countries: ICountry[] = [
     nameEn: "Lebanon",
     dialCode: "+961",
     flag: "🇱🇧",
-    prefixes: ["70", "71", "76", "78", "79", "81"],
+    phonePattern: "^(70|71|76|78|79|81)\\d{6}$",
   },
   {
     code: "SY",
@@ -120,7 +87,7 @@ export const countries: ICountry[] = [
     nameEn: "Syria",
     dialCode: "+963",
     flag: "🇸🇾",
-    prefixes: ["93", "94", "95", "96", "97", "98", "99"],
+    phonePattern: "^(93|94|95|96|97|98|99)\\d{7}$",
   },
   {
     code: "IQ",
@@ -128,7 +95,7 @@ export const countries: ICountry[] = [
     nameEn: "Iraq",
     dialCode: "+964",
     flag: "🇮🇶",
-    prefixes: ["75", "77", "78", "79"],
+    phonePattern: "^(75|77|78|79)\\d{7}$",
   },
   {
     code: "PS",
@@ -136,23 +103,15 @@ export const countries: ICountry[] = [
     nameEn: "Palestine",
     dialCode: "+970",
     flag: "🇵🇸",
-    prefixes: ["56", "59"],
+    phonePattern: "^(56|59)\\d{7}$",
   },
-  // {
-  //   code: "IL",
-  //   name: "إسرائيل",
-  //   nameEn: "Israel",
-  //   dialCode: "+972",
-  //   flag: "🇮🇱",
-  //   prefixes: ["50", "52", "53", "54", "55", "57", "58"],
-  // },
   {
     code: "MA",
     name: "المغرب",
     nameEn: "Morocco",
     dialCode: "+212",
     flag: "🇲🇦",
-    prefixes: ["60", "61", "62", "63", "64", "65", "66", "67", "68", "69"],
+    phonePattern: "^(60|61|62|63|64|65|66|67|68|69)\\d{7}$",
   },
   {
     code: "DZ",
@@ -160,7 +119,7 @@ export const countries: ICountry[] = [
     nameEn: "Algeria",
     dialCode: "+213",
     flag: "🇩🇿",
-    prefixes: ["55", "56", "57", "66", "69", "77", "79"],
+    phonePattern: "^(55|56|57|66|69|77|79)\\d{7}$",
   },
   {
     code: "TN",
@@ -168,27 +127,8 @@ export const countries: ICountry[] = [
     nameEn: "Tunisia",
     dialCode: "+216",
     flag: "🇹🇳",
-    prefixes: [
-      "20",
-      "21",
-      "22",
-      "23",
-      "24",
-      "25",
-      "26",
-      "27",
-      "28",
-      "29",
-      "90",
-      "92",
-      "93",
-      "94",
-      "95",
-      "96",
-      "97",
-      "98",
-      "99",
-    ],
+    phonePattern:
+      "^(20|21|22|23|24|25|26|27|28|29|90|92|93|94|95|96|97|98|99)\\d{6}$",
   },
   {
     code: "LY",
@@ -196,7 +136,7 @@ export const countries: ICountry[] = [
     nameEn: "Libya",
     dialCode: "+218",
     flag: "🇱🇾",
-    prefixes: ["91", "92", "94", "95"],
+    phonePattern: "^(91|92|94|95)\\d{7}$",
   },
   {
     code: "SD",
@@ -204,7 +144,7 @@ export const countries: ICountry[] = [
     nameEn: "Sudan",
     dialCode: "+249",
     flag: "🇸🇩",
-    prefixes: ["90", "91", "92", "99"],
+    phonePattern: "^(90|91|92|99)\\d{7}$",
   },
   {
     code: "YE",
@@ -212,17 +152,15 @@ export const countries: ICountry[] = [
     nameEn: "Yemen",
     dialCode: "+967",
     flag: "🇾🇪",
-    prefixes: ["70", "71", "73", "77", "78"],
+    phonePattern: "^(70|71|73|77|78)\\d{7}$",
   },
-
-  // أمريكا الشمالية
   {
     code: "US",
     name: "الولايات المتحدة",
     nameEn: "United States",
     dialCode: "+1",
     flag: "🇺🇸",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "CA",
@@ -230,7 +168,7 @@ export const countries: ICountry[] = [
     nameEn: "Canada",
     dialCode: "+1",
     flag: "🇨🇦",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "MX",
@@ -238,17 +176,15 @@ export const countries: ICountry[] = [
     nameEn: "Mexico",
     dialCode: "+52",
     flag: "🇲🇽",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
-
-  // أوروبا
   {
     code: "GB",
     name: "المملكة المتحدة",
     nameEn: "United Kingdom",
     dialCode: "+44",
     flag: "🇬🇧",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "DE",
@@ -256,7 +192,7 @@ export const countries: ICountry[] = [
     nameEn: "Germany",
     dialCode: "+49",
     flag: "🇩🇪",
-    prefixes: [],
+    phonePattern: "^\\d{10,11}$",
   },
   {
     code: "FR",
@@ -264,7 +200,7 @@ export const countries: ICountry[] = [
     nameEn: "France",
     dialCode: "+33",
     flag: "🇫🇷",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "IT",
@@ -272,7 +208,7 @@ export const countries: ICountry[] = [
     nameEn: "Italy",
     dialCode: "+39",
     flag: "🇮🇹",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "ES",
@@ -280,7 +216,7 @@ export const countries: ICountry[] = [
     nameEn: "Spain",
     dialCode: "+34",
     flag: "🇪🇸",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "NL",
@@ -288,7 +224,7 @@ export const countries: ICountry[] = [
     nameEn: "Netherlands",
     dialCode: "+31",
     flag: "🇳🇱",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BE",
@@ -296,7 +232,7 @@ export const countries: ICountry[] = [
     nameEn: "Belgium",
     dialCode: "+32",
     flag: "🇧🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "CH",
@@ -304,7 +240,7 @@ export const countries: ICountry[] = [
     nameEn: "Switzerland",
     dialCode: "+41",
     flag: "🇨🇭",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "AT",
@@ -312,7 +248,7 @@ export const countries: ICountry[] = [
     nameEn: "Austria",
     dialCode: "+43",
     flag: "🇦🇹",
-    prefixes: [],
+    phonePattern: "^\\d{10,11}$",
   },
   {
     code: "SE",
@@ -320,7 +256,7 @@ export const countries: ICountry[] = [
     nameEn: "Sweden",
     dialCode: "+46",
     flag: "🇸🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "NO",
@@ -328,7 +264,7 @@ export const countries: ICountry[] = [
     nameEn: "Norway",
     dialCode: "+47",
     flag: "🇳🇴",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "DK",
@@ -336,7 +272,7 @@ export const countries: ICountry[] = [
     nameEn: "Denmark",
     dialCode: "+45",
     flag: "🇩🇰",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "FI",
@@ -344,7 +280,7 @@ export const countries: ICountry[] = [
     nameEn: "Finland",
     dialCode: "+358",
     flag: "🇫🇮",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "PL",
@@ -352,7 +288,7 @@ export const countries: ICountry[] = [
     nameEn: "Poland",
     dialCode: "+48",
     flag: "🇵🇱",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "RU",
@@ -360,7 +296,7 @@ export const countries: ICountry[] = [
     nameEn: "Russia",
     dialCode: "+7",
     flag: "🇷🇺",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "UA",
@@ -368,7 +304,7 @@ export const countries: ICountry[] = [
     nameEn: "Ukraine",
     dialCode: "+380",
     flag: "🇺🇦",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "TR",
@@ -376,7 +312,7 @@ export const countries: ICountry[] = [
     nameEn: "Turkey",
     dialCode: "+90",
     flag: "🇹🇷",
-    prefixes: ["50", "53", "54", "55", "59"],
+    phonePattern: "^(50|53|54|55|59)\\d{7}$",
   },
   {
     code: "GR",
@@ -384,7 +320,7 @@ export const countries: ICountry[] = [
     nameEn: "Greece",
     dialCode: "+30",
     flag: "🇬🇷",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "PT",
@@ -392,7 +328,7 @@ export const countries: ICountry[] = [
     nameEn: "Portugal",
     dialCode: "+351",
     flag: "🇵🇹",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "IE",
@@ -400,7 +336,7 @@ export const countries: ICountry[] = [
     nameEn: "Ireland",
     dialCode: "+353",
     flag: "🇮🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "IS",
@@ -408,7 +344,7 @@ export const countries: ICountry[] = [
     nameEn: "Iceland",
     dialCode: "+354",
     flag: "🇮🇸",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "LU",
@@ -416,7 +352,7 @@ export const countries: ICountry[] = [
     nameEn: "Luxembourg",
     dialCode: "+352",
     flag: "🇱🇺",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MT",
@@ -424,7 +360,7 @@ export const countries: ICountry[] = [
     nameEn: "Malta",
     dialCode: "+356",
     flag: "🇲🇹",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CY",
@@ -432,7 +368,7 @@ export const countries: ICountry[] = [
     nameEn: "Cyprus",
     dialCode: "+357",
     flag: "🇨🇾",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CZ",
@@ -440,7 +376,7 @@ export const countries: ICountry[] = [
     nameEn: "Czech Republic",
     dialCode: "+420",
     flag: "🇨🇿",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "SK",
@@ -448,7 +384,7 @@ export const countries: ICountry[] = [
     nameEn: "Slovakia",
     dialCode: "+421",
     flag: "🇸🇰",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "HU",
@@ -456,7 +392,7 @@ export const countries: ICountry[] = [
     nameEn: "Hungary",
     dialCode: "+36",
     flag: "🇭🇺",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "RO",
@@ -464,7 +400,7 @@ export const countries: ICountry[] = [
     nameEn: "Romania",
     dialCode: "+40",
     flag: "🇷🇴",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BG",
@@ -472,7 +408,7 @@ export const countries: ICountry[] = [
     nameEn: "Bulgaria",
     dialCode: "+359",
     flag: "🇧🇬",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "HR",
@@ -480,7 +416,7 @@ export const countries: ICountry[] = [
     nameEn: "Croatia",
     dialCode: "+385",
     flag: "🇭🇷",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "SI",
@@ -488,7 +424,7 @@ export const countries: ICountry[] = [
     nameEn: "Slovenia",
     dialCode: "+386",
     flag: "🇸🇮",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "RS",
@@ -496,7 +432,7 @@ export const countries: ICountry[] = [
     nameEn: "Serbia",
     dialCode: "+381",
     flag: "🇷🇸",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BA",
@@ -504,7 +440,7 @@ export const countries: ICountry[] = [
     nameEn: "Bosnia and Herzegovina",
     dialCode: "+387",
     flag: "🇧🇦",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "ME",
@@ -512,7 +448,7 @@ export const countries: ICountry[] = [
     nameEn: "Montenegro",
     dialCode: "+382",
     flag: "🇲🇪",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "MK",
@@ -520,7 +456,7 @@ export const countries: ICountry[] = [
     nameEn: "North Macedonia",
     dialCode: "+389",
     flag: "🇲🇰",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "AL",
@@ -528,7 +464,7 @@ export const countries: ICountry[] = [
     nameEn: "Albania",
     dialCode: "+355",
     flag: "🇦🇱",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "XK",
@@ -536,7 +472,7 @@ export const countries: ICountry[] = [
     nameEn: "Kosovo",
     dialCode: "+383",
     flag: "🇽🇰",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "LT",
@@ -544,7 +480,7 @@ export const countries: ICountry[] = [
     nameEn: "Lithuania",
     dialCode: "+370",
     flag: "🇱🇹",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "LV",
@@ -552,7 +488,7 @@ export const countries: ICountry[] = [
     nameEn: "Latvia",
     dialCode: "+371",
     flag: "🇱🇻",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "EE",
@@ -560,7 +496,7 @@ export const countries: ICountry[] = [
     nameEn: "Estonia",
     dialCode: "+372",
     flag: "🇪🇪",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "BY",
@@ -568,7 +504,7 @@ export const countries: ICountry[] = [
     nameEn: "Belarus",
     dialCode: "+375",
     flag: "🇧🇾",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MD",
@@ -576,17 +512,15 @@ export const countries: ICountry[] = [
     nameEn: "Moldova",
     dialCode: "+373",
     flag: "🇲🇩",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
-
-  // آسيا
   {
     code: "JP",
     name: "اليابان",
     nameEn: "Japan",
     dialCode: "+81",
     flag: "🇯🇵",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "KR",
@@ -594,7 +528,7 @@ export const countries: ICountry[] = [
     nameEn: "South Korea",
     dialCode: "+82",
     flag: "🇰🇷",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "KP",
@@ -602,7 +536,7 @@ export const countries: ICountry[] = [
     nameEn: "North Korea",
     dialCode: "+850",
     flag: "🇰🇵",
-    prefixes: [],
+    phonePattern: "^\\d{8,10}$",
   },
   {
     code: "CN",
@@ -610,7 +544,7 @@ export const countries: ICountry[] = [
     nameEn: "China",
     dialCode: "+86",
     flag: "🇨🇳",
-    prefixes: [],
+    phonePattern: "^\\d{11}$",
   },
   {
     code: "IN",
@@ -618,7 +552,7 @@ export const countries: ICountry[] = [
     nameEn: "India",
     dialCode: "+91",
     flag: "🇮🇳",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "PK",
@@ -626,7 +560,7 @@ export const countries: ICountry[] = [
     nameEn: "Pakistan",
     dialCode: "+92",
     flag: "🇵🇰",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "BD",
@@ -634,7 +568,7 @@ export const countries: ICountry[] = [
     nameEn: "Bangladesh",
     dialCode: "+880",
     flag: "🇧🇩",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "LK",
@@ -642,7 +576,7 @@ export const countries: ICountry[] = [
     nameEn: "Sri Lanka",
     dialCode: "+94",
     flag: "🇱🇰",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MM",
@@ -650,7 +584,7 @@ export const countries: ICountry[] = [
     nameEn: "Myanmar",
     dialCode: "+95",
     flag: "🇲🇲",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "TH",
@@ -658,7 +592,7 @@ export const countries: ICountry[] = [
     nameEn: "Thailand",
     dialCode: "+66",
     flag: "🇹🇭",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "VN",
@@ -666,7 +600,7 @@ export const countries: ICountry[] = [
     nameEn: "Vietnam",
     dialCode: "+84",
     flag: "🇻🇳",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "LA",
@@ -674,7 +608,7 @@ export const countries: ICountry[] = [
     nameEn: "Laos",
     dialCode: "+856",
     flag: "🇱🇦",
-    prefixes: [],
+    phonePattern: "^\\d{8,10}$",
   },
   {
     code: "KH",
@@ -682,7 +616,7 @@ export const countries: ICountry[] = [
     nameEn: "Cambodia",
     dialCode: "+855",
     flag: "🇰🇭",
-    prefixes: [],
+    phonePattern: "^\\d{8,9}$",
   },
   {
     code: "MY",
@@ -690,7 +624,7 @@ export const countries: ICountry[] = [
     nameEn: "Malaysia",
     dialCode: "+60",
     flag: "🇲🇾",
-    prefixes: [],
+    phonePattern: "^\\d{9,10}$",
   },
   {
     code: "SG",
@@ -698,7 +632,7 @@ export const countries: ICountry[] = [
     nameEn: "Singapore",
     dialCode: "+65",
     flag: "🇸🇬",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "ID",
@@ -706,7 +640,7 @@ export const countries: ICountry[] = [
     nameEn: "Indonesia",
     dialCode: "+62",
     flag: "🇮🇩",
-    prefixes: [],
+    phonePattern: "^\\d{9,11}$",
   },
   {
     code: "PH",
@@ -714,7 +648,7 @@ export const countries: ICountry[] = [
     nameEn: "Philippines",
     dialCode: "+63",
     flag: "🇵🇭",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "BN",
@@ -722,7 +656,7 @@ export const countries: ICountry[] = [
     nameEn: "Brunei",
     dialCode: "+673",
     flag: "🇧🇳",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "TL",
@@ -730,7 +664,7 @@ export const countries: ICountry[] = [
     nameEn: "East Timor",
     dialCode: "+670",
     flag: "🇹🇱",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "IR",
@@ -738,7 +672,7 @@ export const countries: ICountry[] = [
     nameEn: "Iran",
     dialCode: "+98",
     flag: "🇮🇷",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "AF",
@@ -746,7 +680,7 @@ export const countries: ICountry[] = [
     nameEn: "Afghanistan",
     dialCode: "+93",
     flag: "🇦🇫",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "UZ",
@@ -754,7 +688,7 @@ export const countries: ICountry[] = [
     nameEn: "Uzbekistan",
     dialCode: "+998",
     flag: "🇺🇿",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "KZ",
@@ -762,7 +696,7 @@ export const countries: ICountry[] = [
     nameEn: "Kazakhstan",
     dialCode: "+7",
     flag: "🇰🇿",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "KG",
@@ -770,7 +704,7 @@ export const countries: ICountry[] = [
     nameEn: "Kyrgyzstan",
     dialCode: "+996",
     flag: "🇰🇬",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "TJ",
@@ -778,7 +712,7 @@ export const countries: ICountry[] = [
     nameEn: "Tajikistan",
     dialCode: "+992",
     flag: "🇹🇯",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "TM",
@@ -786,7 +720,7 @@ export const countries: ICountry[] = [
     nameEn: "Turkmenistan",
     dialCode: "+993",
     flag: "🇹🇲",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "MN",
@@ -794,7 +728,7 @@ export const countries: ICountry[] = [
     nameEn: "Mongolia",
     dialCode: "+976",
     flag: "🇲🇳",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "NP",
@@ -802,7 +736,7 @@ export const countries: ICountry[] = [
     nameEn: "Nepal",
     dialCode: "+977",
     flag: "🇳🇵",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "BT",
@@ -810,7 +744,7 @@ export const countries: ICountry[] = [
     nameEn: "Bhutan",
     dialCode: "+975",
     flag: "🇧🇹",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "MV",
@@ -818,7 +752,7 @@ export const countries: ICountry[] = [
     nameEn: "Maldives",
     dialCode: "+960",
     flag: "🇲🇻",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "GE",
@@ -826,7 +760,7 @@ export const countries: ICountry[] = [
     nameEn: "Georgia",
     dialCode: "+995",
     flag: "🇬🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "AM",
@@ -834,7 +768,7 @@ export const countries: ICountry[] = [
     nameEn: "Armenia",
     dialCode: "+374",
     flag: "🇦🇲",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "AZ",
@@ -842,7 +776,7 @@ export const countries: ICountry[] = [
     nameEn: "Azerbaijan",
     dialCode: "+994",
     flag: "🇦🇿",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "TW",
@@ -850,7 +784,7 @@ export const countries: ICountry[] = [
     nameEn: "Taiwan",
     dialCode: "+886",
     flag: "🇹🇼",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "HK",
@@ -858,7 +792,7 @@ export const countries: ICountry[] = [
     nameEn: "Hong Kong",
     dialCode: "+852",
     flag: "🇭🇰",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "MO",
@@ -866,17 +800,15 @@ export const countries: ICountry[] = [
     nameEn: "Macau",
     dialCode: "+853",
     flag: "🇲🇴",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
-
-  // أفريقيا
   {
     code: "ZA",
     name: "جنوب أفريقيا",
     nameEn: "South Africa",
     dialCode: "+27",
     flag: "🇿🇦",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "NG",
@@ -884,7 +816,7 @@ export const countries: ICountry[] = [
     nameEn: "Nigeria",
     dialCode: "+234",
     flag: "🇳🇬",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "KE",
@@ -892,7 +824,7 @@ export const countries: ICountry[] = [
     nameEn: "Kenya",
     dialCode: "+254",
     flag: "🇰🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "ET",
@@ -900,7 +832,7 @@ export const countries: ICountry[] = [
     nameEn: "Ethiopia",
     dialCode: "+251",
     flag: "🇪🇹",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "UG",
@@ -908,7 +840,7 @@ export const countries: ICountry[] = [
     nameEn: "Uganda",
     dialCode: "+256",
     flag: "🇺🇬",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "TZ",
@@ -916,7 +848,7 @@ export const countries: ICountry[] = [
     nameEn: "Tanzania",
     dialCode: "+255",
     flag: "🇹🇿",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "RW",
@@ -924,7 +856,7 @@ export const countries: ICountry[] = [
     nameEn: "Rwanda",
     dialCode: "+250",
     flag: "🇷🇼",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BI",
@@ -932,7 +864,7 @@ export const countries: ICountry[] = [
     nameEn: "Burundi",
     dialCode: "+257",
     flag: "🇧🇮",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "DJ",
@@ -940,7 +872,7 @@ export const countries: ICountry[] = [
     nameEn: "Djibouti",
     dialCode: "+253",
     flag: "🇩🇯",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "SO",
@@ -948,7 +880,7 @@ export const countries: ICountry[] = [
     nameEn: "Somalia",
     dialCode: "+252",
     flag: "🇸🇴",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "ER",
@@ -956,7 +888,7 @@ export const countries: ICountry[] = [
     nameEn: "Eritrea",
     dialCode: "+291",
     flag: "🇪🇷",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "SS",
@@ -964,7 +896,7 @@ export const countries: ICountry[] = [
     nameEn: "South Sudan",
     dialCode: "+211",
     flag: "🇸🇸",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "CF",
@@ -972,7 +904,7 @@ export const countries: ICountry[] = [
     nameEn: "Central African Republic",
     dialCode: "+236",
     flag: "🇨🇫",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "TD",
@@ -980,7 +912,7 @@ export const countries: ICountry[] = [
     nameEn: "Chad",
     dialCode: "+235",
     flag: "🇹🇩",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CM",
@@ -988,7 +920,7 @@ export const countries: ICountry[] = [
     nameEn: "Cameroon",
     dialCode: "+237",
     flag: "🇨🇲",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "GQ",
@@ -996,7 +928,7 @@ export const countries: ICountry[] = [
     nameEn: "Equatorial Guinea",
     dialCode: "+240",
     flag: "🇬🇶",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "GA",
@@ -1004,7 +936,7 @@ export const countries: ICountry[] = [
     nameEn: "Gabon",
     dialCode: "+241",
     flag: "🇬🇦",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CG",
@@ -1012,7 +944,7 @@ export const countries: ICountry[] = [
     nameEn: "Republic of the Congo",
     dialCode: "+242",
     flag: "🇨🇬",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "CD",
@@ -1020,7 +952,7 @@ export const countries: ICountry[] = [
     nameEn: "Democratic Republic of the Congo",
     dialCode: "+243",
     flag: "🇨🇩",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "AO",
@@ -1028,7 +960,7 @@ export const countries: ICountry[] = [
     nameEn: "Angola",
     dialCode: "+244",
     flag: "🇦🇴",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "ZM",
@@ -1036,7 +968,7 @@ export const countries: ICountry[] = [
     nameEn: "Zambia",
     dialCode: "+260",
     flag: "🇿🇲",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MW",
@@ -1044,7 +976,7 @@ export const countries: ICountry[] = [
     nameEn: "Malawi",
     dialCode: "+265",
     flag: "🇲🇼",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MZ",
@@ -1052,7 +984,7 @@ export const countries: ICountry[] = [
     nameEn: "Mozambique",
     dialCode: "+258",
     flag: "🇲🇿",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MG",
@@ -1060,7 +992,7 @@ export const countries: ICountry[] = [
     nameEn: "Madagascar",
     dialCode: "+261",
     flag: "🇲🇬",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "MU",
@@ -1068,7 +1000,7 @@ export const countries: ICountry[] = [
     nameEn: "Mauritius",
     dialCode: "+230",
     flag: "🇲🇺",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "SC",
@@ -1076,7 +1008,7 @@ export const countries: ICountry[] = [
     nameEn: "Seychelles",
     dialCode: "+248",
     flag: "🇸🇨",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "KM",
@@ -1084,7 +1016,7 @@ export const countries: ICountry[] = [
     nameEn: "Comoros",
     dialCode: "+269",
     flag: "🇰🇲",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "ZW",
@@ -1092,7 +1024,7 @@ export const countries: ICountry[] = [
     nameEn: "Zimbabwe",
     dialCode: "+263",
     flag: "🇿🇼",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BW",
@@ -1100,7 +1032,7 @@ export const countries: ICountry[] = [
     nameEn: "Botswana",
     dialCode: "+267",
     flag: "🇧🇼",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "NA",
@@ -1108,7 +1040,7 @@ export const countries: ICountry[] = [
     nameEn: "Namibia",
     dialCode: "+264",
     flag: "🇳🇦",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "SZ",
@@ -1116,7 +1048,7 @@ export const countries: ICountry[] = [
     nameEn: "Eswatini",
     dialCode: "+268",
     flag: "🇸🇿",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "LS",
@@ -1124,7 +1056,7 @@ export const countries: ICountry[] = [
     nameEn: "Lesotho",
     dialCode: "+266",
     flag: "🇱🇸",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "GH",
@@ -1132,7 +1064,7 @@ export const countries: ICountry[] = [
     nameEn: "Ghana",
     dialCode: "+233",
     flag: "🇬🇭",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BF",
@@ -1140,7 +1072,7 @@ export const countries: ICountry[] = [
     nameEn: "Burkina Faso",
     dialCode: "+226",
     flag: "🇧🇫",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "ML",
@@ -1148,7 +1080,7 @@ export const countries: ICountry[] = [
     nameEn: "Mali",
     dialCode: "+223",
     flag: "🇲🇱",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "NE",
@@ -1156,7 +1088,7 @@ export const countries: ICountry[] = [
     nameEn: "Niger",
     dialCode: "+227",
     flag: "🇳🇪",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CI",
@@ -1164,7 +1096,7 @@ export const countries: ICountry[] = [
     nameEn: "Ivory Coast",
     dialCode: "+225",
     flag: "🇨🇮",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "LR",
@@ -1172,7 +1104,7 @@ export const countries: ICountry[] = [
     nameEn: "Liberia",
     dialCode: "+231",
     flag: "🇱🇷",
-    prefixes: [],
+    phonePattern: "^\\d{7,9}$",
   },
   {
     code: "SL",
@@ -1180,7 +1112,7 @@ export const countries: ICountry[] = [
     nameEn: "Sierra Leone",
     dialCode: "+232",
     flag: "🇸🇱",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "GN",
@@ -1188,7 +1120,7 @@ export const countries: ICountry[] = [
     nameEn: "Guinea",
     dialCode: "+224",
     flag: "🇬🇳",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "GW",
@@ -1196,7 +1128,7 @@ export const countries: ICountry[] = [
     nameEn: "Guinea-Bissau",
     dialCode: "+245",
     flag: "🇬🇼",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "SN",
@@ -1204,7 +1136,7 @@ export const countries: ICountry[] = [
     nameEn: "Senegal",
     dialCode: "+221",
     flag: "🇸🇳",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "GM",
@@ -1212,7 +1144,7 @@ export const countries: ICountry[] = [
     nameEn: "Gambia",
     dialCode: "+220",
     flag: "🇬🇲",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "MR",
@@ -1220,7 +1152,7 @@ export const countries: ICountry[] = [
     nameEn: "Mauritania",
     dialCode: "+222",
     flag: "🇲🇷",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CV",
@@ -1228,7 +1160,7 @@ export const countries: ICountry[] = [
     nameEn: "Cape Verde",
     dialCode: "+238",
     flag: "🇨🇻",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "ST",
@@ -1236,7 +1168,7 @@ export const countries: ICountry[] = [
     nameEn: "São Tomé and Príncipe",
     dialCode: "+239",
     flag: "🇸🇹",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "TG",
@@ -1244,7 +1176,7 @@ export const countries: ICountry[] = [
     nameEn: "Togo",
     dialCode: "+228",
     flag: "🇹🇬",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "BJ",
@@ -1252,17 +1184,15 @@ export const countries: ICountry[] = [
     nameEn: "Benin",
     dialCode: "+229",
     flag: "🇧🇯",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
-
-  // أمريكا الجنوبية
   {
     code: "BR",
     name: "البرازيل",
     nameEn: "Brazil",
     dialCode: "+55",
     flag: "🇧🇷",
-    prefixes: [],
+    phonePattern: "^\\d{10,11}$",
   },
   {
     code: "AR",
@@ -1270,7 +1200,7 @@ export const countries: ICountry[] = [
     nameEn: "Argentina",
     dialCode: "+54",
     flag: "🇦🇷",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "CL",
@@ -1278,7 +1208,7 @@ export const countries: ICountry[] = [
     nameEn: "Chile",
     dialCode: "+56",
     flag: "🇨🇱",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "CO",
@@ -1286,7 +1216,7 @@ export const countries: ICountry[] = [
     nameEn: "Colombia",
     dialCode: "+57",
     flag: "🇨🇴",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "VE",
@@ -1294,7 +1224,7 @@ export const countries: ICountry[] = [
     nameEn: "Venezuela",
     dialCode: "+58",
     flag: "🇻🇪",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "PE",
@@ -1302,7 +1232,7 @@ export const countries: ICountry[] = [
     nameEn: "Peru",
     dialCode: "+51",
     flag: "🇵🇪",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "EC",
@@ -1310,7 +1240,7 @@ export const countries: ICountry[] = [
     nameEn: "Ecuador",
     dialCode: "+593",
     flag: "🇪🇨",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "BO",
@@ -1318,7 +1248,7 @@ export const countries: ICountry[] = [
     nameEn: "Bolivia",
     dialCode: "+591",
     flag: "🇧🇴",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "PY",
@@ -1326,7 +1256,7 @@ export const countries: ICountry[] = [
     nameEn: "Paraguay",
     dialCode: "+595",
     flag: "🇵🇾",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "UY",
@@ -1334,7 +1264,7 @@ export const countries: ICountry[] = [
     nameEn: "Uruguay",
     dialCode: "+598",
     flag: "🇺🇾",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "GY",
@@ -1342,7 +1272,7 @@ export const countries: ICountry[] = [
     nameEn: "Guyana",
     dialCode: "+592",
     flag: "🇬🇾",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "SR",
@@ -1350,7 +1280,7 @@ export const countries: ICountry[] = [
     nameEn: "Suriname",
     dialCode: "+597",
     flag: "🇸🇷",
-    prefixes: [],
+    phonePattern: "^\\d{7,8}$",
   },
   {
     code: "GF",
@@ -1358,17 +1288,15 @@ export const countries: ICountry[] = [
     nameEn: "French Guiana",
     dialCode: "+594",
     flag: "🇬🇫",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
-
-  // أمريكا الوسطى والكاريبي
   {
     code: "GT",
     name: "غواتيمالا",
     nameEn: "Guatemala",
     dialCode: "+502",
     flag: "🇬🇹",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "BZ",
@@ -1376,7 +1304,7 @@ export const countries: ICountry[] = [
     nameEn: "Belize",
     dialCode: "+501",
     flag: "🇧🇿",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "SV",
@@ -1384,7 +1312,7 @@ export const countries: ICountry[] = [
     nameEn: "El Salvador",
     dialCode: "+503",
     flag: "🇸🇻",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "HN",
@@ -1392,7 +1320,7 @@ export const countries: ICountry[] = [
     nameEn: "Honduras",
     dialCode: "+504",
     flag: "🇭🇳",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "NI",
@@ -1400,7 +1328,7 @@ export const countries: ICountry[] = [
     nameEn: "Nicaragua",
     dialCode: "+505",
     flag: "🇳🇮",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CR",
@@ -1408,7 +1336,7 @@ export const countries: ICountry[] = [
     nameEn: "Costa Rica",
     dialCode: "+506",
     flag: "🇨🇷",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "PA",
@@ -1416,7 +1344,7 @@ export const countries: ICountry[] = [
     nameEn: "Panama",
     dialCode: "+507",
     flag: "🇵🇦",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CU",
@@ -1424,7 +1352,7 @@ export const countries: ICountry[] = [
     nameEn: "Cuba",
     dialCode: "+53",
     flag: "🇨🇺",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "HT",
@@ -1432,7 +1360,7 @@ export const countries: ICountry[] = [
     nameEn: "Haiti",
     dialCode: "+509",
     flag: "🇭🇹",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "DO",
@@ -1440,7 +1368,7 @@ export const countries: ICountry[] = [
     nameEn: "Dominican Republic",
     dialCode: "+1",
     flag: "🇩🇴",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "JM",
@@ -1448,7 +1376,7 @@ export const countries: ICountry[] = [
     nameEn: "Jamaica",
     dialCode: "+1",
     flag: "🇯🇲",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "TT",
@@ -1456,7 +1384,7 @@ export const countries: ICountry[] = [
     nameEn: "Trinidad and Tobago",
     dialCode: "+1",
     flag: "🇹🇹",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "BB",
@@ -1464,7 +1392,7 @@ export const countries: ICountry[] = [
     nameEn: "Barbados",
     dialCode: "+1",
     flag: "🇧🇧",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
   {
     code: "BS",
@@ -1472,17 +1400,15 @@ export const countries: ICountry[] = [
     nameEn: "Bahamas",
     dialCode: "+1",
     flag: "🇧🇸",
-    prefixes: [],
+    phonePattern: "^\\d{10}$",
   },
-
-  // أوقيانوسيا
   {
     code: "AU",
     name: "أستراليا",
     nameEn: "Australia",
     dialCode: "+61",
     flag: "🇦🇺",
-    prefixes: [],
+    phonePattern: "^\\d{9}$",
   },
   {
     code: "NZ",
@@ -1490,7 +1416,7 @@ export const countries: ICountry[] = [
     nameEn: "New Zealand",
     dialCode: "+64",
     flag: "🇳🇿",
-    prefixes: [],
+    phonePattern: "^\\d{8,10}$",
   },
   {
     code: "FJ",
@@ -1498,7 +1424,7 @@ export const countries: ICountry[] = [
     nameEn: "Fiji",
     dialCode: "+679",
     flag: "🇫🇯",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "PG",
@@ -1506,7 +1432,7 @@ export const countries: ICountry[] = [
     nameEn: "Papua New Guinea",
     dialCode: "+675",
     flag: "🇵🇬",
-    prefixes: [],
+    phonePattern: "^\\d{7,8}$",
   },
   {
     code: "NC",
@@ -1514,7 +1440,7 @@ export const countries: ICountry[] = [
     nameEn: "New Caledonia",
     dialCode: "+687",
     flag: "🇳🇨",
-    prefixes: [],
+    phonePattern: "^\\d{6}$",
   },
   {
     code: "SB",
@@ -1522,7 +1448,7 @@ export const countries: ICountry[] = [
     nameEn: "Solomon Islands",
     dialCode: "+677",
     flag: "🇸🇧",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "VU",
@@ -1530,7 +1456,7 @@ export const countries: ICountry[] = [
     nameEn: "Vanuatu",
     dialCode: "+678",
     flag: "🇻🇺",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "WS",
@@ -1538,7 +1464,7 @@ export const countries: ICountry[] = [
     nameEn: "Samoa",
     dialCode: "+685",
     flag: "🇼🇸",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "TO",
@@ -1546,7 +1472,7 @@ export const countries: ICountry[] = [
     nameEn: "Tonga",
     dialCode: "+676",
     flag: "🇹🇴",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "KI",
@@ -1554,7 +1480,7 @@ export const countries: ICountry[] = [
     nameEn: "Kiribati",
     dialCode: "+686",
     flag: "🇰🇮",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "TV",
@@ -1562,7 +1488,7 @@ export const countries: ICountry[] = [
     nameEn: "Tuvalu",
     dialCode: "+688",
     flag: "🇹🇻",
-    prefixes: [],
+    phonePattern: "^\\d{6}$",
   },
   {
     code: "NR",
@@ -1570,7 +1496,7 @@ export const countries: ICountry[] = [
     nameEn: "Nauru",
     dialCode: "+674",
     flag: "🇳🇷",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "PW",
@@ -1578,7 +1504,7 @@ export const countries: ICountry[] = [
     nameEn: "Palau",
     dialCode: "+680",
     flag: "🇵🇼",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "FM",
@@ -1586,7 +1512,7 @@ export const countries: ICountry[] = [
     nameEn: "Federated States of Micronesia",
     dialCode: "+691",
     flag: "🇫🇲",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "MH",
@@ -1594,7 +1520,7 @@ export const countries: ICountry[] = [
     nameEn: "Marshall Islands",
     dialCode: "+692",
     flag: "🇲🇭",
-    prefixes: [],
+    phonePattern: "^\\d{7}$",
   },
   {
     code: "PF",
@@ -1602,7 +1528,7 @@ export const countries: ICountry[] = [
     nameEn: "French Polynesia",
     dialCode: "+689",
     flag: "🇵🇫",
-    prefixes: [],
+    phonePattern: "^\\d{8}$",
   },
   {
     code: "CK",
@@ -1610,6 +1536,6 @@ export const countries: ICountry[] = [
     nameEn: "Cook Islands",
     dialCode: "+682",
     flag: "🇨🇰",
-    prefixes: [],
+    phonePattern: "^\\d{5}$",
   },
 ];

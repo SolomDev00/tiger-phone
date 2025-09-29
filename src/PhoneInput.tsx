@@ -7,10 +7,13 @@ import React, {
 } from "react";
 import { ChevronDown, Phone, Search, Loader2 } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
-import { countries } from "./data/countries";
+import { countries, ICountry } from "./data/countries";
+import "./style.css";
 
+// SSR-safe check
 const isClient = typeof window !== "undefined";
 
+// Debounce hook
 const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -44,25 +47,16 @@ interface IPhoneInputProps {
   icon?: boolean;
 }
 
-interface ICountry {
-  code: string;
-  name: string;
-  nameEn: string;
-  dialCode: string;
-  flag: string;
-  prefixes: string[];
-}
-
 /**
  * Tiger Phone Input component with auto country detection.
  *
- * @param {PhoneInputProps} props - The props for the PhoneInput component.
+ * @param {IPhoneInputProps} props - The props for the PhoneInput component.
  * @param {string} [props.value] - The current value of the phone input.
  * @param {(value: string) => void} [props.onChange] - Callback function when the value changes.
  * @param {string} [props.error] - Error message to display.
- * @param {string} [props.label="PhoneNumber"] - Label text.
- * @param {string} [props.placeholder="PhoneNumber"] - Placeholder text.
- * @param {string} [props.defaultCountryCode="EG"] - Default country code.
+ * @param {string} [props.label="Phone Number"] - Label text.
+ * @param {string} [props.placeholder="Enter your phone number"] - Placeholder text.
+ * @param {string} [props.defaultCountryCode="EG"] - Default country ISO code.
  * @param {boolean} [props.showLabel=true] - Whether to show the label.
  * @param {boolean} [props.showFlag=true] - Whether to show the flag.
  * @param {boolean} [props.showDialCode=true] - Whether to show the dial code.
@@ -76,8 +70,8 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
   value,
   onChange,
   error,
-  label = "Phonenumber",
-  placeholder = "Enter your Phonenumber ...",
+  label = "Phone Number",
+  placeholder = "Enter your phone number",
   defaultCountryCode = "EG",
   showLabel = true,
   showFlag = true,
@@ -86,18 +80,20 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
   language = "ar",
   disabled = false,
   isLoading = false,
-  icon = false,
+  icon,
 }) => {
   const [selectedCountry, setSelectedCountry] = useState<ICountry | null>(
     countries.find(
       (c) => c.code.toUpperCase() === defaultCountryCode.toUpperCase()
-    ) || countries[0]
+    ) ||
+      countries[0] ||
+      null
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const dropdownRef = useRef(null);
-  const inputRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
@@ -113,47 +109,48 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
     );
   }, [debouncedSearchTerm]);
 
-  const detectCountryFromNumber = useCallback((number: string) => {
-    const cleanNumber = number.replace(/[^\d]/g, "");
+  const detectCountryFromNumber = useCallback(
+    (number: string): ICountry | null => {
+      const cleanNumber = number.replace(/[^\d]/g, "");
 
-    for (const country of countries) {
-      const dialCodeDigits = country.dialCode.replace("+", "");
-      if (cleanNumber.startsWith(dialCodeDigits)) {
-        return country;
-      }
-    }
-
-    if (cleanNumber.length >= 2) {
-      const prefix2 = cleanNumber.substring(0, 2);
-      const prefix3 =
-        cleanNumber.length >= 3 ? cleanNumber.substring(0, 3) : null;
-
+      // First, try to match by dial code
       for (const country of countries) {
-        if (
-          country.prefixes &&
-          (country.prefixes.indexOf(prefix2) !== -1 ||
-            (prefix3 && country.prefixes.indexOf(prefix3) !== -1))
-        ) {
+        const dialCodeDigits = country.dialCode.replace("+", "");
+        if (cleanNumber.startsWith(dialCodeDigits)) {
           return country;
         }
       }
-    }
 
-    return null;
-  }, []);
+      // If no dial code match, try to match using phonePattern
+      if (cleanNumber.length >= 2) {
+        for (const country of countries) {
+          const pattern = new RegExp(country.phonePattern);
+          if (pattern.test(cleanNumber)) {
+            return country;
+          }
+        }
+      }
 
-  const removeCountryCode = useCallback((number: string, country: ICountry) => {
-    if (!country || !number) return number;
+      return null;
+    },
+    []
+  );
 
-    const cleanNumber = number.replace(/[^\d]/g, "");
-    const dialCodeDigits = country.dialCode.replace("+", "");
+  const removeCountryCode = useCallback(
+    (number: string, country: ICountry | null) => {
+      if (!country || !number) return number;
 
-    if (cleanNumber.startsWith(dialCodeDigits)) {
-      return cleanNumber.substring(dialCodeDigits.length);
-    }
+      const cleanNumber = number.replace(/[^\d]/g, "");
+      const dialCodeDigits = country.dialCode.replace("+", "");
 
-    return number;
-  }, []);
+      if (cleanNumber.startsWith(dialCodeDigits)) {
+        return cleanNumber.substring(dialCodeDigits.length);
+      }
+
+      return number;
+    },
+    []
+  );
 
   useEffect(() => {
     if (value && !phoneNumber) {
@@ -170,8 +167,11 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
         setPhoneNumber(removeCountryCode(value, detected));
       } else {
         const defaultCountry =
-          countries.find((c) => c.code === defaultCountryCode.toLowerCase()) ||
-          countries[0];
+          countries.find(
+            (c) => c.code.toUpperCase() === defaultCountryCode.toUpperCase()
+          ) ||
+          countries[0] ||
+          null;
         setSelectedCountry(defaultCountry);
         setPhoneNumber(value);
       }
@@ -185,10 +185,11 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
   ]);
 
   useEffect(() => {
-    if (!selectedCountry) {
+    if (!selectedCountry && countries.length > 0) {
       const defaultCountry =
-        countries.find((c) => c.code === defaultCountryCode.toLowerCase()) ||
-        countries[0];
+        countries.find(
+          (c) => c.code.toUpperCase() === defaultCountryCode.toUpperCase()
+        ) || countries[0];
       setSelectedCountry(defaultCountry);
     }
   }, [selectedCountry, defaultCountryCode]);
@@ -200,8 +201,11 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
       if (!inputValue) {
         setPhoneNumber("");
         const defaultCountry =
-          countries.find((c) => c.code === defaultCountryCode.toLowerCase()) ||
-          countries[0];
+          countries.find(
+            (c) => c.code.toUpperCase() === defaultCountryCode.toUpperCase()
+          ) ||
+          countries[0] ||
+          null;
         setSelectedCountry(defaultCountry);
         if (onChange) onChange("");
         return;
@@ -253,11 +257,8 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
         if (onChange) onChange(newFullNumber);
       }
 
-      if (
-        inputRef.current &&
-        typeof (inputRef.current as HTMLInputElement).focus === "function"
-      ) {
-        (inputRef.current as HTMLInputElement).focus();
+      if (inputRef.current) {
+        inputRef.current.focus();
       }
     },
     [phoneNumber, onChange]
@@ -269,9 +270,7 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
-        !(dropdownRef.current as HTMLInputElement).contains(
-          event.target as Node
-        )
+        !dropdownRef.current.contains(event.target as Node)
       ) {
         setIsDropdownOpen(false);
         setSearchTerm("");
@@ -297,58 +296,55 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
     language === "en" ? country.nameEn : country.name;
 
   return (
-    <div className="flex flex-col gap-1" dir={dir}>
+    <div style={{ direction: dir }} className="phone-input-container">
       {showLabel && (
-        <div className="w-full flex items-center justify-between px-2">
-          <label
-            htmlFor="phone-input"
-            className="text-black/85 font-medium text-base"
-          >
+        <div className="phone-input-label-container">
+          <label htmlFor="phone-input" className="phone-input-label">
             {label}
           </label>
         </div>
       )}
 
-      <div className="relative" ref={dropdownRef}>
+      <div className="phone-input-wrapper" ref={dropdownRef}>
         <div
-          className={`flex w-full border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-primary ${
-            disabled ? "opacity-50 cursor-not-allowed" : ""
+          className={`phone-input-field ${
+            disabled ? "phone-input-disabled" : ""
           }`}
         >
           <button
             type="button"
-            className="flex-shrink-0 border-r cursor-pointer transition-colors focus:outline-none"
+            className="phone-input-country-button"
             onClick={toggleDropdown}
             disabled={disabled || isLoading}
             aria-expanded={isDropdownOpen}
             aria-controls="country-dropdown"
           >
-            <div className="flex items-center gap-2 px-3 py-3 min-w-[75px]">
+            <div className="phone-input-country-content">
               {showFlag && selectedCountry && (
                 <img
                   src={`https://flagcdn.com/${selectedCountry.code.toLowerCase()}.svg`}
                   alt={`${getCountryDisplayName(selectedCountry)} flag`}
-                  className="w-7 h-auto"
+                  className="phone-input-flag"
                   loading="lazy"
                 />
               )}
               {showDialCode && selectedCountry && (
-                <span className="text-sm font-medium text-gray-700">
+                <span className="phone-input-dial-code">
                   {selectedCountry.dialCode}
                 </span>
               )}
               <ChevronDown
-                className={`w-4 h-4 text-gray-500 transition-transform ${
-                  isDropdownOpen ? "rotate-180" : ""
+                className={`phone-input-chevron ${
+                  isDropdownOpen ? "phone-input-chevron-open" : ""
                 }`}
               />
             </div>
           </button>
 
-          <div className="flex-1 relative">
+          <div className="phone-input-text-container">
             {isLoading ? (
-              <div className="flex items-center justify-center py-3">
-                <Loader2 className="w-5 h-5 animate-spin text-gray-500" />
+              <div className="phone-input-loading">
+                <Loader2 className="phone-input-loader" />
               </div>
             ) : (
               <>
@@ -360,17 +356,14 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
                   />
                 )}
                 <input
+                  id="phone-input"
                   ref={inputRef}
                   type="tel"
                   value={phoneNumber}
                   onChange={handleInputChange}
                   placeholder={placeholder}
-                  className={`w-full py-3 border-none outline-none text-gray-900`}
+                  className="phone-input-text"
                   dir={dir}
-                  style={{
-                    paddingLeft: dir === "rtl" ? "0px" : "15px",
-                    paddingRight: "0px",
-                  }}
                   disabled={disabled}
                   aria-invalid={!!error}
                   aria-describedby={error ? "phone-error" : undefined}
@@ -381,16 +374,15 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
         </div>
 
         {isDropdownOpen && (
-          <div
-            id="country-dropdown"
-            className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-xl z-50 mt-1"
-          >
-            <div className="p-3 border-b">
-              <div className="relative">
+          <div id="country-dropdown" className="phone-input-dropdown">
+            <div className="phone-input-search-container">
+              <div className="phone-input-search-wrapper">
                 <Search
-                  className={`absolute ${
-                    dir === "rtl" ? "left-3" : "right-3"
-                  } top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4`}
+                  className={`phone-input-search-icon ${
+                    dir === "rtl"
+                      ? "phone-input-search-icon-rtl"
+                      : "phone-input-search-icon-ltr"
+                  }`}
                 />
                 <input
                   type="text"
@@ -399,24 +391,18 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
                   placeholder={
                     language === "ar"
                       ? "ابحث عن دولة..."
-                      : "Search for the country"
+                      : "Search for a country..."
                   }
-                  className={`w-full py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary`}
+                  className="phone-input-search"
                   dir={dir}
-                  style={{
-                    paddingLeft: dir === "rtl" ? "40px" : "15px",
-                    paddingRight: dir === "rtl" ? "15px" : "40px",
-                  }}
                 />
               </div>
             </div>
 
-            <div className="h-64">
+            <div className="phone-input-dropdown-list">
               {filteredCountries.length === 0 ? (
-                <div className="p-4 text-center text-gray-500 text-sm">
-                  {language === "ar"
-                    ? "لا توجد نتائج"
-                    : "There are no results."}
+                <div className="phone-input-no-results">
+                  {language === "ar" ? "لا توجد نتائج" : "No results"}
                 </div>
               ) : (
                 <Virtuoso
@@ -425,8 +411,10 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
                     <button
                       key={country.code}
                       type="button"
-                      className={`w-full flex items-center gap-3 px-3 py-3 hover:bg-gray-100 cursor-pointer transition-colors ${
-                        dir === "rtl" ? "text-right" : "text-left"
+                      className={`phone-input-country-item ${
+                        dir === "rtl"
+                          ? "phone-input-country-item-rtl"
+                          : "phone-input-country-item-ltr"
                       }`}
                       onClick={() => selectCountry(country)}
                     >
@@ -434,17 +422,17 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
                         <img
                           src={`https://flagcdn.com/${country.code.toLowerCase()}.svg`}
                           alt={`${getCountryDisplayName(country)} flag`}
-                          className="w-7 h-5 flex-shrink-0"
+                          className="phone-input-country-flag"
                           loading="lazy"
                         />
                       )}
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900">
+                      <div className="phone-input-country-name">
+                        <div className="phone-input-country-primary">
                           {getCountryDisplayName(country)}
                         </div>
                       </div>
                       {showDialCode && (
-                        <span className="text-sm text-gray-600 flex-shrink-0">
+                        <span className="phone-input-country-dial">
                           {country.dialCode}
                         </span>
                       )}
@@ -457,7 +445,7 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({
         )}
 
         {error && (
-          <p id="phone-error" className="text-red-500 text-sm mt-1">
+          <p id="phone-error" className="phone-input-error">
             {error}
           </p>
         )}

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext",
+    "module": "CommonJS",
     "jsx": "react-jsx",
     "declaration": true,
     "outDir": "./dist",
@@ -12,6 +12,6 @@
     "skipLibCheck": true,
     "types": ["react"]
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
 }

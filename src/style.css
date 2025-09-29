@@ -1,0 +1,270 @@
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.phone-input-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  width: 100%;
+}
+
+.phone-input-label {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.phone-input-wrapper {
+  position: relative;
+}
+
+.phone-input-field {
+  display: flex;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.phone-input-field:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.phone-input-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.phone-input-country-button {
+  flex-shrink: 0;
+  border-right: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  outline: none;
+}
+
+.phone-input-country-button:hover {
+  background-color: #f3f4f6;
+}
+
+.phone-input-country-button:focus {
+  background-color: #f3f4f6;
+}
+
+.phone-input-country-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  min-width: 75px;
+}
+
+.phone-input-flag {
+  width: 28px;
+  height: auto;
+}
+
+.phone-input-dial-code {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.phone-input-chevron {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+  transition: transform 0.3s;
+}
+
+.phone-input-chevron-open {
+  transform: rotate(180deg);
+}
+
+.phone-input-text-container {
+  flex: 1;
+  position: relative;
+}
+
+.phone-input-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.phone-input-loader {
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  color: #6b7280;
+}
+
+.phone-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+}
+
+.phone-input-icon-ltr {
+  right: 12px;
+}
+
+.phone-input-icon-rtl {
+  left: 12px;
+}
+
+.phone-input-text {
+  width: 100%;
+  padding: 12px;
+  padding-left: 15px;
+  padding-right: 40px;
+  border: none;
+  outline: none;
+  color: #111827;
+  font-size: 14px;
+}
+
+.phone-input-text[dir="rtl"] {
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+.phone-input-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  margin-top: 4px;
+}
+
+.phone-input-search-container {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.phone-input-search-wrapper {
+  position: relative;
+}
+
+.phone-input-search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+.phone-input-search-icon-ltr {
+  right: 12px;
+}
+
+.phone-input-search-icon-rtl {
+  left: 12px;
+}
+
+.phone-input-search {
+  width: 100%;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.phone-input-search:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.phone-input-search[dir="rtl"] {
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+.phone-input-dropdown-list {
+  height: 256px;
+}
+
+.phone-input-no-results {
+  padding: 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.phone-input-country-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.phone-input-country-item:hover {
+  background-color: #f3f4f6;
+}
+
+.phone-input-country-item-ltr {
+  text-align: left;
+}
+
+.phone-input-country-item-rtl {
+  text-align: right;
+}
+
+.phone-input-country-flag {
+  width: 28px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.phone-input-country-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.phone-input-country-primary {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.phone-input-country-dial {
+  font-size: 14px;
+  color: #4b5563;
+  flex-shrink: 0;
+}
+
+.phone-input-error {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
